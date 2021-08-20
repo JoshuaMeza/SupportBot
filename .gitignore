@@ -1,2 +1,5 @@
+__pycache__
+.vscode
 *.env
-__pychache__
+TEST.*
+memory.json

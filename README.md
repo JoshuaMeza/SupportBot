@@ -1,3 +1,3 @@
-# AnnieBot repository
+# SupportBot repository
 
 version 0.0.1

@@ -20,11 +20,11 @@ class Subject:
         self.name = name
 
     def getNextLinkIndex(self) -> int:
-        self.linkIndex = self.linkIndex + 1
+        self.linkIndex += 1
         return self.linkIndex - 1
 
     def getNextNoteIndex(self) -> int:
-        self.noteIndex = self.noteIndex + 1
+        self.noteIndex += 1
         return self.noteIndex - 1
 
     # Students management
@@ -173,7 +173,7 @@ class Subject:
         output = ''
 
         for student in self.students:
-            output = output + student.toString() + '\n'
+            output += student.toString() + '\n'
 
         if output != '': output = output[:-1]
 
@@ -193,7 +193,7 @@ class Subject:
         output = ''
 
         for link in self.links:
-            output = output + link.toString() + '\n'
+            output += link.toString() + '\n'
 
         if output != '': output = output[:-1]
 
@@ -203,7 +203,7 @@ class Subject:
         output = ''
 
         for note in self.notes:
-            output = output + note.toString() + '\n'
+            output += note.toString() + '\n'
 
         if output != '': output = output[:-1]
 

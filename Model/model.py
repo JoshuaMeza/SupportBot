@@ -37,22 +37,6 @@ class Model:
         fileHandler = FileHandler()
         return fileHandler.writeJSON(self.fileName, info)
 
-    # Guilds management
-
-    def __buildGuilds(self):
-        # Read json and generate objects
-        pass
-
-    def __verifyGuildExistence(self, guildId) -> bool:
-        exists = False
-
-        for guild in self.guilds:
-            if guild.getGuildId == guildId:
-                exists = True
-                break
-
-        return exists
-
     def __updatePersistentData(self) -> bool:
         listDict = []
 
@@ -61,14 +45,151 @@ class Model:
 
         return self.__writeData({"Guilds" : listDict})
 
-    def addGuild(self, guildId: int) -> bool:
+    # Guilds management
+
+    def __buildGuilds(self):
+        info = self.__readData()
+        index = 0
+
+        try:
+            for guild in info['Guilds']:
+                # Move through all guilds
+
+                if self.addGuild(guild['GuildId'], False):
+                    # Avoid duplicates
+
+                    for subject in guild['Subjects']:
+                        # Move through all subjects
+                        subjectName = subject['SubjectName']
+                        
+                        if self.guilds[index].addSubject(subjectName):
+                            # Avoid duplicates
+                            # Start adding the subject data ¬
+
+                            for student in subject['Members']:
+                                # Move through all students
+                                discordId = student['DiscordId']
+
+                                if self.guilds[index].addStudent(subjectName, discordId):
+                                    #Adding aditional information of students
+
+                                    if student['Names'] is not None:
+                                        self.guilds[index].editStudentNames(student['Names'], discordId)
+
+                                    if student['LastNames'] is not None:
+                                        self.guilds[index].editStudentLastNames(student['LastNames'], discordId)
+
+                                    if student['CollegeId'] is not None:
+                                        self.guilds[index].editStudentCollegeId(student['CollegeId'], discordId)
+
+                                    if student['Email'] is not None:
+                                        self.guilds[index].editStudentEmail(student['Email'], discordId)
+
+                                    if student['PhoneNumber'] is not None:
+                                        self.guilds[index].editStudentPhoneNumber(student['PhoneNumber'], discordId)
+
+                            for link in subject['Links']:
+                                # Move through all links
+                                self.guilds[index].addLink(subjectName, link['Name'], link['URL'])
+
+                            for note in subject['Notes']:
+                                # Move through all notes
+                                self.guilds[index].addNote(subjectName, note['Name'], note['Text'])
+
+                    index += 1
+        except KeyError:
+            print('Memory loading problem!')
+
+    def __verifyGuildExistence(self, guildId) -> bool:
+        exists = False
+
+        for guild in self.guilds:
+            if guild.getGuildId() == guildId:
+                exists = True
+                break
+
+        return exists
+
+    def addGuild(self, guildId: int, overwrite = True) -> bool:
         flag = True
 
         try:
-            if not self.__verifyGuildExistence():
+            if not self.__verifyGuildExistence(guildId):
                 g = GuildNode(guildId)
                 self.guilds.append(g)
+            else:
+                flag = False
         except:
             flag = False
 
+        if flag and overwrite:
+            self.__updatePersistentData()
+
         return flag
+
+    # Subjects management
+
+    def addSubjectToGuild(self, guildId: int, subjectName: str) -> bool:
+        flag = False
+
+        for guild in self.guilds:
+            if guild.getGuildId() == guildId:
+                flag = guild.addSubject(subjectName)
+                break
+
+        if flag:
+            self.__updatePersistentData()
+
+        return flag
+
+    def removeSubjectOfGuild(self, guildId: int, subjectName: str) -> bool:
+        flag = False
+
+        for guild in self.guilds:
+            if guild.getGuildId() == guildId:
+                flag = guild.removeSubject(subjectName)
+                break
+
+        if flag:
+            self.__updatePersistentData()
+
+        return flag
+
+    # Students management
+
+    def addStudentToSubjectFromGuild(self, guildId: int, subjectName: str, discordId: int) -> bool:
+        pass
+
+    def removeStudentOfSubjectFromGuild(self, guildId: int, subjectName: str, discordId: int) -> bool:
+        pass
+
+    def editStudentNamesFromGuild(self, guildId: int, names: str, discordId: int) -> bool:
+        pass
+
+    def editStudentLastNamesFromGuild(self, guildId: int, lastNames: str, discordId: int) -> bool:
+        pass
+
+    def editStudentCollegeIdFromGuild(self, guildId: int, collegeId: int, discordId: int) -> bool:
+        pass
+
+    def editStudentEmailFromGuild(self, guildId: int, email: str, discordId: int) -> bool:
+        pass
+
+    def editStudentPhoneNumberFromGuild(self, guildId: int, phoneNum: int, discordId: int) -> bool:
+        pass
+
+    # Links management
+
+    def addLinkToSubjectFromGuild(self, guildId: int, subjectName: str, name: str, url: str) -> bool:
+        pass
+
+    def removeLinkOfSubjectFromGuild(self, guildId: int, subjectName: str, index: int) -> bool:
+        pass
+
+    # Notes management
+
+    def addNoteToSubjectFromGuild(self, guildId: int, subjectName: str, name: str, text: str) -> bool:
+        pass
+
+    def removeNoteOfSubjectFromGuild(self, guildId: int, subjectName: str, index: int) -> bool:
+        pass
