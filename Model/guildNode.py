@@ -4,6 +4,7 @@ class GuildNode:
     def __init__(self, guildId: int):
         self.guildId = guildId
         self.subjects = []
+        self.noInfoAnswer = 'There\'s no information related'
 
     # Getters and setters
 
@@ -52,12 +53,32 @@ class GuildNode:
 
     # Students management
 
+    def __studentSearcher(self, discordId) -> dict:
+        output = {}
+
+        for subject in self.subjects:
+            data = subject.getStudentData(discordId)
+            if data != {}:
+                # An student with that id was found
+                output = data
+                break
+
+        return output
+
     def addStudent(self, subjectName: str, discordId: int) -> bool:
         flag = False
 
         for subject in self.subjects:
             if subject.getName() == subjectName:
-                flag = subject.addStudent(discordId)
+                # What if the student actually exists?
+                data = self.__studentSearcher(discordId)
+                
+                if data == {}:
+                    # New student
+                    flag = subject.addStudent(discordId)
+                else:
+                    # Existent student was found
+                    flag = subject.addStudentAndGenerate(data)
                 break
 
         return flag
@@ -169,7 +190,10 @@ class GuildNode:
         for subject in self.subjects:
             output = output + subject.getStudents() + '\n'
 
-        if output != '': output = output[:-1]
+        if output != '': 
+            output = output[:-1]
+        else:
+            output = self.noInfoAnswer
 
         return output
 
@@ -181,6 +205,9 @@ class GuildNode:
                 output = subject.getStudents()
                 break
 
+        if output == '':
+            output = self.noInfoAnswer
+
         return output
 
     def getStudentFromSubject(self, subjectName: str, discordId: int) -> str:
@@ -190,6 +217,9 @@ class GuildNode:
             if subject.getName() == subjectName:
                 output = subject.getStudent(discordId)
                 break
+
+        if output == '':
+            output = self.noInfoAnswer
 
         return output
 
@@ -201,6 +231,9 @@ class GuildNode:
                 output = subject.getLinks()
                 break
 
+        if output == '':
+            output = self.noInfoAnswer
+
         return output
 
     def getNotesFromSubject(self, subjectName: str) -> str:
@@ -210,6 +243,9 @@ class GuildNode:
             if subject.getName() == subjectName:
                 output = subject.getNotes()
                 break
+
+        if output == '':
+            output = self.noInfoAnswer
 
         return output
 

@@ -27,7 +27,7 @@ class Note:
     # Printing data
 
     def toString(self) -> str:
-        return f'Id:{self.index},Name:{self.name},Note:{self.text}'
+        return f'Id: {self.index}, Name: {self.name},\nNote: {self.text}'
 
     # Dictionary
 

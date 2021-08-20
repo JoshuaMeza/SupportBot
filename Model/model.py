@@ -7,10 +7,12 @@ class Model:
         self.errColor = discord.Colour.from_rgb(225, 7, 0)
         self.defColor = discord.Colour.from_rgb(0, 239, 134)
         self.prefix = '!'
-        self.helpStatus = True
-        self.guilds = []
         self.fileName = 'memory.json'
-        
+        self.noInfoAnswer = 'There\'s no information related'
+        self.guilds = []
+
+        self.helpStatus = True
+
         self.__buildGuilds()
 
     # Getters and setters
@@ -158,38 +160,189 @@ class Model:
     # Students management
 
     def addStudentToSubjectFromGuild(self, guildId: int, subjectName: str, discordId: int) -> bool:
-        pass
+        flag = False
+
+        for guild in self.guilds:
+            if guild.getGuildId() == guildId:
+                flag = guild.addStudent(subjectName, discordId)
+                break
+
+        if flag:
+            self.__updatePersistentData()
+
+        return flag
 
     def removeStudentOfSubjectFromGuild(self, guildId: int, subjectName: str, discordId: int) -> bool:
-        pass
+        flag = False
+
+        for guild in self.guilds:
+            if guild.getGuildId() == guildId:
+                flag = guild.removeStudent(subjectName, discordId)
+                break
+
+        if flag:
+            self.__updatePersistentData()
+
+        return flag
 
     def editStudentNamesFromGuild(self, guildId: int, names: str, discordId: int) -> bool:
-        pass
+        flag = False
+
+        for guild in self.guilds:
+            if guild.getGuildId() == guildId:
+                flag = guild.editStudentNames(names, discordId)
+                break
+
+        if flag:
+            self.__updatePersistentData()
+
+        return flag
 
     def editStudentLastNamesFromGuild(self, guildId: int, lastNames: str, discordId: int) -> bool:
-        pass
+        flag = False
+
+        for guild in self.guilds:
+            if guild.getGuildId() == guildId:
+                flag = guild.editStudentLastNames(lastNames, discordId)
+                break
+
+        if flag:
+            self.__updatePersistentData()
+
+        return flag
 
     def editStudentCollegeIdFromGuild(self, guildId: int, collegeId: int, discordId: int) -> bool:
-        pass
+        flag = False
+
+        for guild in self.guilds:
+            if guild.getGuildId() == guildId:
+                flag = guild.editStudentCollegeId(collegeId, discordId)
+                break
+
+        if flag:
+            self.__updatePersistentData()
+
+        return flag
 
     def editStudentEmailFromGuild(self, guildId: int, email: str, discordId: int) -> bool:
-        pass
+        flag = False
+
+        for guild in self.guilds:
+            if guild.getGuildId() == guildId:
+                flag = guild.editStudentEmail(email, discordId)
+                break
+
+        if flag:
+            self.__updatePersistentData()
+
+        return flag
 
     def editStudentPhoneNumberFromGuild(self, guildId: int, phoneNum: int, discordId: int) -> bool:
-        pass
+        flag = False
+
+        for guild in self.guilds:
+            if guild.getGuildId() == guildId:
+                flag = guild.editStudentPhoneNumber(phoneNum, discordId)
+                break
+
+        if flag:
+            self.__updatePersistentData()
+
+        return flag
 
     # Links management
 
     def addLinkToSubjectFromGuild(self, guildId: int, subjectName: str, name: str, url: str) -> bool:
-        pass
+        flag = False
+
+        for guild in self.guilds:
+            if guild.getGuildId() == guildId:
+                flag = guild.addLink(subjectName, name, url)
+                break
+
+        if flag:
+            self.__updatePersistentData()
+
+        return flag
 
     def removeLinkOfSubjectFromGuild(self, guildId: int, subjectName: str, index: int) -> bool:
-        pass
+        flag = False
+
+        for guild in self.guilds:
+            if guild.getGuildId() == guildId:
+                flag = guild.removeLink(subjectName, index)
+                break
+
+        if flag:
+            self.__updatePersistentData()
+
+        return flag
 
     # Notes management
 
     def addNoteToSubjectFromGuild(self, guildId: int, subjectName: str, name: str, text: str) -> bool:
-        pass
+        flag = False
+
+        for guild in self.guilds:
+            if guild.getGuildId() == guildId:
+                flag = guild.addNote(subjectName, name, text)
+                break
+
+        if flag:
+            self.__updatePersistentData()
+
+        return flag
 
     def removeNoteOfSubjectFromGuild(self, guildId: int, subjectName: str, index: int) -> bool:
-        pass
+        flag = False
+
+        for guild in self.guilds:
+            if guild.getGuildId() == guildId:
+                flag = guild.removeNote(subjectName, index)
+                break
+
+        if flag:
+            self.__updatePersistentData()
+
+        return flag
+
+    # Printing data
+
+    def getStudentsFromSubject(self, guildId: int, subjectName: str) -> str:
+        output = ''
+
+        for guild in self.guilds:
+            if guild.getGuildId() == guildId:
+                output = guild.getStudentsFromSubject(subjectName)
+                break
+
+        if output == '':
+            output = self.noInfoAnswer
+
+        return output
+
+    def getLinksFromSubject(self, guildId: int, subjectName: str) -> str:
+        output = ''
+
+        for guild in self.guilds:
+            if guild.getGuildId() == guildId:
+                output = guild.getLinksFromSubject(subjectName)
+                break
+
+        if output == '':
+            output = self.noInfoAnswer
+
+        return output
+
+    def getNotesFromSubject(self, guildId: int, subjectName: str) -> str:
+        output = ''
+
+        for guild in self.guilds:
+            if guild.getGuildId() == guildId:
+                output = guild.getNotesFromSubject(subjectName)
+                break
+
+        if output == '':
+            output = self.noInfoAnswer
+
+        return output

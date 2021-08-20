@@ -83,8 +83,7 @@ class Student:
     # Printing data
 
     def toString(self) -> str:
-        return f'Names:{self.getNames},LastNames:{self.getLastNames},\
-        Id:{self.getCollegeId},Email:{self.getEmail},Number:{self.getPhoneNumber}'
+        return f'Names: {self.getNames()}, Last Names: {self.getLastNames()}, Id: {self.getCollegeId()},\nEmail: {self.getEmail()}, Phone number: {self.getPhoneNumber()}'
 
     # Dictionary
 

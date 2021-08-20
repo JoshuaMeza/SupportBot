@@ -27,7 +27,7 @@ class Link:
     # Printing data
 
     def toString(self) -> str:
-        return f'Id:{self.index},Name:{self.name},Link:{self.url}'
+        return f'Id: {self.index}, Name: {self.name},\nLink: {self.url}'
 
     # Dictionary
 

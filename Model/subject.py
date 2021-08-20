@@ -10,6 +10,7 @@ class Subject:
         self.links = []
         self.noteIndex = 0
         self.notes = []
+        self.noInfoAnswer = 'There\'s no information related'
 
     # Getters and setters
     
@@ -45,6 +46,39 @@ class Subject:
         try:
             if not self.__verifyStudentExistence(discordId):
                 s = Student(discordId)
+                self.students.append(s)
+            else:
+                flag = False
+        except:
+            flag = False
+        
+        return flag
+
+    def addStudentAndGenerate(self, student: dict) -> bool:
+        flag = True
+
+        try:
+            if not self.__verifyStudentExistence(student['DiscordId']):
+                # Create
+                s = Student(student['DiscordId'])
+
+                #Update
+                if student['Names'] is not None:
+                    s.setNames(student['Names'])
+
+                if student['LastNames'] is not None:
+                    s.setLastNames(student['LastNames'])
+
+                if student['CollegeId'] is not None:
+                    s.setCollegeId(student['CollegeId'])
+
+                if student['Email'] is not None:
+                    s.setEmail(student['Email'])
+
+                if student['PhoneNumber'] is not None:
+                    s.setPhoneNumber(student['PhoneNumber'])
+
+                # Save
                 self.students.append(s)
             else:
                 flag = False
@@ -175,7 +209,10 @@ class Subject:
         for student in self.students:
             output += student.toString() + '\n'
 
-        if output != '': output = output[:-1]
+        if output != '': 
+            output = output[:-1]
+        else:
+            output = self.noInfoAnswer
 
         return output
 
@@ -187,6 +224,9 @@ class Subject:
                 output = student.toString()
                 break
 
+        if output == '':
+            output = self.noInfoAnswer
+
         return output
 
     def getLinks(self) -> str:
@@ -195,7 +235,10 @@ class Subject:
         for link in self.links:
             output += link.toString() + '\n'
 
-        if output != '': output = output[:-1]
+        if output != '': 
+            output = output[:-1]
+        else:
+            output = self.noInfoAnswer
 
         return output
 
@@ -205,11 +248,24 @@ class Subject:
         for note in self.notes:
             output += note.toString() + '\n'
 
-        if output != '': output = output[:-1]
+        if output != '': 
+            output = output[:-1]
+        else:
+            output = self.noInfoAnswer
 
         return output
 
     # Dictionary
+
+    def getStudentData(self, discordId: int) -> dict:
+        output = {}
+
+        for student in self.students:
+            if student.getDiscordId() == discordId:
+                output = student.toDict()
+                break
+
+        return output
 
     def toDict(self) -> dict:
         studentDict = []
