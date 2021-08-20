@@ -29,7 +29,8 @@ class Help(commands.Cog):
                     f'**{prefix}help**: List of all commands.\n'
                     f'**{prefix}help logs**: List of all logs commands.\n'
                     f'**{prefix}help user**: List of all users commands.\n'
-                    f'**{prefix}help nb**: List of all notebook commands.',
+                    f'**{prefix}help nb**: List of all notebook commands.\n'
+                    f'**{prefix}help clean: List of all clean commands.',
                 inline=False
             )
         elif arg == 'LOGS':
@@ -58,6 +59,13 @@ class Help(commands.Cog):
                     f'**{prefix}nb peek link**: Peek the team saved links.\n'
                     f'**{prefix}nb write [note/link]**: Write in the notebook.\n'
                     f'**{prefix}nb erase [note/link]**: Erase something from the notebook.',
+                inline=False
+            )
+        elif arg == 'CLEAN':
+            embed.add_field(
+                name='Clean',
+                value='The clean command helps to delete messages on the current channel.\n'
+                    f'🔒**{prefix}clean [amount?]**: Erase the amount of messages (10 by default).',
                 inline=False
             )
         else:

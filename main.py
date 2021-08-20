@@ -11,6 +11,7 @@ import os
 #from controller.keepAlive import *
 from Model.model import *
 from Controller.Commands.commandHelp import *
+from Controller.Commands.commandClean import *
 
 # Variables
 model = Model()
@@ -30,6 +31,14 @@ async def on_ready():
 async def on_message(message):
     if message.author != client.user:
         await client.process_commands(message)
+
+@client.event
+async def on_guild_join(guild):
+    model.addGuild(guild.id)
+
+@client.event
+async def on_guild_remove(guild):
+    model.removeGuild(guild.id)
 
 @client.event
 async def on_command_error(ctx, error):
@@ -84,6 +93,8 @@ async def on_command_error(ctx, error):
 # Adding commands
 if model.getCommandHelpStatus():
     client.add_cog(Help(client, model))
+if model.getCommandCleanStatus():
+    client.add_cog(Clean(client, model))
 
 # Activate bot
 load_dotenv()

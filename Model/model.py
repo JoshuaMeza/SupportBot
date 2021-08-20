@@ -12,6 +12,7 @@ class Model:
         self.guilds = []
 
         self.helpStatus = True
+        self.cleanStatus = True
 
         self.__buildGuilds()
 
@@ -28,6 +29,9 @@ class Model:
     
     def getCommandHelpStatus(self) -> bool:
         return self.helpStatus
+
+    def getCommandCleanStatus(self) -> bool:
+        return self.cleanStatus
 
     # File management
 
@@ -125,6 +129,20 @@ class Model:
             flag = False
 
         if flag and overwrite:
+            self.__updatePersistentData()
+
+        return flag
+
+    def removeGuild(self, guildId: int) -> bool:
+        flag = False
+
+        for guild in self.guilds:
+            if guild.getGuildId() == guildId:
+                self.guilds.remove(guild)
+                flag = True
+                break
+
+        if flag:
             self.__updatePersistentData()
 
         return flag
