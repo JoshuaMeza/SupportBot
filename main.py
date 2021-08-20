@@ -1,7 +1,7 @@
 """
 Author Joshua I. Meza Magaña
 Date 16/08/2021
-Version 0.0.1
+Version 0.1.0
 A bot which helps with team organization.
 """
 import discord
