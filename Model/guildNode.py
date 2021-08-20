@@ -51,6 +51,16 @@ class GuildNode:
 
         return flag
 
+    def containsSubject(self, subjectName: str) -> bool:
+        flag = False
+
+        for subject in self.subjects:
+            if subject.getName() == subjectName:
+                flag = True
+                break
+
+        return flag
+
     # Students management
 
     def __studentSearcher(self, discordId) -> dict:

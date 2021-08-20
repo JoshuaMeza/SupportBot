@@ -1,8 +1,9 @@
 import discord
 from discord.ext import commands
+from Model.model import *
 
 class Clean(commands.Cog):
-    def __init__(self, client, model):
+    def __init__(self, client, model: Model):
         self.client = client
         self.model = model
 
@@ -12,7 +13,7 @@ class Clean(commands.Cog):
 
     @commands.command(name='clean', aliases=['CLEAN'], ignore_extra=False)
     @commands.has_role('BotManager')
-    async def command_help(self, ctx, amount=10):
+    async def command_clean(self, ctx, amount=10):
         def check(m):
             return True
 

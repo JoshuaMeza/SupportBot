@@ -18,7 +18,7 @@ class Help(commands.Cog):
 
         embed = discord.Embed(
             title='Commands list',
-            description='**NOTE:** Commands with a lock requires a role called "BotManager".',
+            description=f'**NOTE:** Commands with a lock requires a role called "{self.model.getLockRoleName()}".',
             colour=self.model.getDefaultColor()
         )
 
@@ -38,7 +38,8 @@ class Help(commands.Cog):
                 name='Logs',
                 value='The logs command manages the registered subjects.\n'
                     f'🔒**{prefix}logs add**: Add the actual category as a subject.\n'
-                    f'🔒**{prefix}logs del**: Delete the actual category as a subject.',
+                    f'🔒**{prefix}logs del**: Delete the actual category as a subject.\n'
+                    f'**{prefix}logs vfy**: Verify if the current category is a subject.',
                 inline=False
             ) # TODO: The guild shall be added automatically
         elif arg == 'USER':

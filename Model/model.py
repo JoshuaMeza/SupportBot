@@ -9,10 +9,12 @@ class Model:
         self.prefix = '!'
         self.fileName = 'memory.json'
         self.noInfoAnswer = 'There\'s no information related'
+        self.lockRoleName = 'BotManager'
         self.guilds = []
 
         self.helpStatus = True
         self.cleanStatus = True
+        self.logsStatus = True
 
         self.__buildGuilds()
 
@@ -26,12 +28,18 @@ class Model:
 
     def getDefaultColor(self) -> discord.Colour:
         return self.defColor
+
+    def getLockRoleName(self) -> str:
+        return self.lockRoleName
     
     def getCommandHelpStatus(self) -> bool:
         return self.helpStatus
 
     def getCommandCleanStatus(self) -> bool:
         return self.cleanStatus
+
+    def getCommandLogsStatus(self) -> bool:
+        return self.logsStatus
 
     # File management
 
@@ -174,6 +182,17 @@ class Model:
             self.__updatePersistentData()
 
         return flag
+
+    def containsSubject(self, guildId: int, subjectName: str) -> bool:
+        flag = False
+
+        for guild in self.guilds:
+            if guild.getGuildId() == guildId:
+                flag = guild.containsSubject(subjectName)
+                break
+
+        return flag
+
 
     # Students management
 

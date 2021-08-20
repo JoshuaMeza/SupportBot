@@ -12,6 +12,7 @@ import os
 from Model.model import *
 from Controller.Commands.commandHelp import *
 from Controller.Commands.commandClean import *
+from Controller.Commands.commandLogs import *
 
 # Variables
 model = Model()
@@ -75,6 +76,12 @@ async def on_command_error(ctx, error):
             description='You tried to use a disabled command.',
             colour=errColor
         )
+    elif isinstance(error, commands.MissingRole):
+        embed = discord.Embed(
+            title='Role Error',
+            description='You don\'t have a required role to execute that command.',
+            colour=errColor
+        )
     else:
         embed = discord.Embed(
             title='Undefined Error',
@@ -93,8 +100,12 @@ async def on_command_error(ctx, error):
 # Adding commands
 if model.getCommandHelpStatus():
     client.add_cog(Help(client, model))
+
 if model.getCommandCleanStatus():
     client.add_cog(Clean(client, model))
+
+if model.getCommandLogsStatus():
+    client.add_cog(Logs(client, model))
 
 # Activate bot
 load_dotenv()
