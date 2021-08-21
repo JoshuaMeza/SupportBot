@@ -114,7 +114,7 @@ class Notebook(commands.Cog):
                 # Ask for url
                 embed = discord.Embed(
                     title='Notebook command',
-                    description='Send a message with the content of the note.',
+                    description='Send a message with the content of the link.',
                     colour=self.model.getDefaultColor()
                 )
                 embed.set_footer(text='Timeout in 20 seconds!')
