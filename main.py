@@ -1,7 +1,7 @@
 """
 Author Joshua I. Meza Magaña
 Date 16/08/2021
-Version 0.1.0
+Version 1.0.0
 A bot which helps with team organization.
 """
 import discord
@@ -14,6 +14,8 @@ from Controller.Commands.commandHelp import *
 from Controller.Commands.commandClean import *
 from Controller.Commands.commandLogs import *
 from Controller.Commands.commandNotebook import *
+from Controller.Commands.commandUser import *
+from Controller.Commands.commandIntroduction import *
 
 # Variables
 model = Model()
@@ -103,6 +105,8 @@ client.add_cog(Help(client, model))
 client.add_cog(Clean(client, model))
 client.add_cog(Logs(client, model))
 client.add_cog(Notebook(client, model))
+client.add_cog(User(client, model))
+client.add_cog(Introduction(client, model))
 
 # Activate bot
 load_dotenv()
