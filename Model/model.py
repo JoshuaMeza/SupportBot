@@ -12,10 +12,6 @@ class Model:
         self.lockRoleName = 'BotManager'
         self.guilds = []
 
-        self.helpStatus = True
-        self.cleanStatus = True
-        self.logsStatus = True
-
         self.__buildGuilds()
 
     # Getters and setters
@@ -31,15 +27,6 @@ class Model:
 
     def getLockRoleName(self) -> str:
         return self.lockRoleName
-    
-    def getCommandHelpStatus(self) -> bool:
-        return self.helpStatus
-
-    def getCommandCleanStatus(self) -> bool:
-        return self.cleanStatus
-
-    def getCommandLogsStatus(self) -> bool:
-        return self.logsStatus
 
     # File management
 

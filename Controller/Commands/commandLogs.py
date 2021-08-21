@@ -7,7 +7,7 @@ class Logs(commands.Cog):
         self.client = client
         self.model = model
 
-    def verRole(self, roles):
+    def __verRole(self, roles):
         flag = False
 
         for role in roles:
@@ -28,17 +28,17 @@ class Logs(commands.Cog):
 
         if arg == 'ADD' or arg == 'DEL':
             # Role required
-            if self.verRole(ctx.author.roles):
+            if self.__verRole(ctx.author.roles):
                 # Add
                 if arg == 'ADD':
                     if self.model.addSubjectToGuild(ctx.guild.id, ctx.channel.category.name):
-                        desc = 'Category succesfully added as a subject.'
+                        desc = 'Category successfully added as a subject.'
                     else:
                         desc = 'Category failed to be added as a subject.'
                 # Delete
                 else:
                     if self.model.removeSubjectOfGuild(ctx.guild.id, ctx.channel.category.name):
-                        desc = 'Subject succesfully deleted.'
+                        desc = 'Subject successfully deleted.'
                     else:
                         desc = 'Subject failed to be deleted.'
             else:

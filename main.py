@@ -13,6 +13,7 @@ from Model.model import *
 from Controller.Commands.commandHelp import *
 from Controller.Commands.commandClean import *
 from Controller.Commands.commandLogs import *
+from Controller.Commands.commandNotebook import *
 
 # Variables
 model = Model()
@@ -67,7 +68,7 @@ async def on_command_error(ctx, error):
     elif isinstance(error, commands.MissingRequiredArgument) or isinstance(error, commands.BadArgument) or isinstance(error, commands.TooManyArguments):
         embed = discord.Embed(
             title='Arguments Error',
-            description='You are giving incorrect parameters.',
+            description='There was a problem with your given parameters.',
             colour=errColor
         )
     elif isinstance(error, commands.DisabledCommand):
@@ -98,14 +99,10 @@ async def on_command_error(ctx, error):
 #keep_alive()
 
 # Adding commands
-if model.getCommandHelpStatus():
-    client.add_cog(Help(client, model))
-
-if model.getCommandCleanStatus():
-    client.add_cog(Clean(client, model))
-
-if model.getCommandLogsStatus():
-    client.add_cog(Logs(client, model))
+client.add_cog(Help(client, model))
+client.add_cog(Clean(client, model))
+client.add_cog(Logs(client, model))
+client.add_cog(Notebook(client, model))
 
 # Activate bot
 load_dotenv()

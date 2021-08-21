@@ -30,7 +30,8 @@ class Help(commands.Cog):
                     f'**{prefix}help logs**: List of all logs commands.\n'
                     f'**{prefix}help user**: List of all users commands.\n'
                     f'**{prefix}help nb**: List of all notebook commands.\n'
-                    f'**{prefix}help clean: List of all clean commands.',
+                    f'**{prefix}help clean**: List of all clean commands.\n'
+                    f'**{prefix}help intro**: List of all introductory commands.',
                 inline=False
             )
         elif arg == 'LOGS':
@@ -67,6 +68,13 @@ class Help(commands.Cog):
                 name='Clean',
                 value='The clean command helps to delete messages on the current channel.\n'
                     f'🔒**{prefix}clean [amount?]**: Erase the amount of messages (10 by default).',
+                inline=False
+            )
+        elif arg == 'INTRO':
+            embed.add_field(
+                name='Introduction',
+                value='The introduction command helps to teach how to use the bot.\n'
+                    f'🔒**{prefix}intro**: Sends instructions of how to use the bot.',
                 inline=False
             )
         else:
