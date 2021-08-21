@@ -8,7 +8,7 @@ import discord
 from discord.ext import commands
 from dotenv import load_dotenv
 import os
-#from controller.keepAlive import *
+from Controller.keepAlive import *
 from Model.model import *
 from Controller.Commands.commandHelp import *
 from Controller.Commands.commandClean import *
@@ -98,7 +98,7 @@ async def on_command_error(ctx, error):
 
         
 # Activate web host
-#keep_alive()
+keep_alive()
 
 # Adding commands
 client.add_cog(Help(client, model))
