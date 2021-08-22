@@ -220,12 +220,12 @@ class GuildNode:
 
         return output
 
-    def getStudentFromSubject(self, subjectName: str, discordId: int) -> str:
+    def getStudentFromSubject(self, subjectName: str, discordId: int, CSV: bool) -> str:
         output = ''
 
         for subject in self.subjects:
             if subject.getName() == subjectName:
-                output = subject.getStudent(discordId)
+                output = subject.getStudent(discordId, CSV)
                 break
 
         if output == '':

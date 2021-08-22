@@ -31,8 +31,9 @@ class User(commands.Cog):
 
         if action == 'ADD':
             if self.model.addStudentToSubjectFromGuild(ctx.guild.id, ctx.channel.category.name, target.id):
+                if self.model.getStudentFromSubject(ctx.guild.id, ctx.channel.category.name, target.id, True).split(',')[0] == 'unknown':
+                    self.model.editStudentNamesFromGuild(ctx.guild.id, target.name, target.id)
                 desc = 'Student successfully added to this subject.'
-                self.model.editStudentNamesFromGuild(ctx.guild.id, target.name, target.id)
             else:
                 desc = 'Student failed to be added to this subject.'
         elif action == 'MOD':

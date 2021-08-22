@@ -216,12 +216,15 @@ class Subject:
 
         return output
 
-    def getStudent(self, discordId: int) -> str:
+    def getStudent(self, discordId: int, CSV: bool) -> str:
         output = ''
 
         for student in self.students:
             if student.getDiscordId() == discordId:
-                output = student.toString()
+                if not CSV:
+                    output = student.toString()
+                else:
+                    output = student.toCSV()
                 break
 
         if output == '':
@@ -287,4 +290,3 @@ class Subject:
             "Links" : linkDict,
             "Notes" : noteDict
         }
-    

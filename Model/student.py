@@ -83,7 +83,10 @@ class Student:
     # Printing data
 
     def toString(self) -> str:
-        return f'Names: {self.getNames()}, Last Names: {self.getLastNames()}, Id: {self.getCollegeId()},\nEmail: {self.getEmail()}, Phone number: {self.getPhoneNumber()}'
+        return f'👤 Names: {self.getNames()}, Last Names: {self.getLastNames()}, Id: {self.getCollegeId()},\nEmail: {self.getEmail()}, Phone number: {self.getPhoneNumber()}'
+
+    def toCSV(self) -> str:
+        return f'{self.getNames()},{self.getLastNames()},{self.getCollegeId()},{self.getEmail()},{self.getPhoneNumber()}'
 
     # Dictionary
 
@@ -96,4 +99,3 @@ class Student:
             "PhoneNumber" : self.phoneNum,
             "DiscordId" : self.discordId
         }
-    

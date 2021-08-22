@@ -345,6 +345,19 @@ class Model:
 
         return output
 
+    def getStudentFromSubject(self, guildId: int, subjectName: str, discordId: int, CSV: bool) -> str:
+        output = ''
+
+        for guild in self.guilds:
+            if guild.getGuildId() == guildId:
+                output = guild.getStudentFromSubject(subjectName, discordId, CSV)
+                break
+
+        if output == '':
+            output = self.noInfoAnswer
+
+        return output
+
     def getLinksFromSubject(self, guildId: int, subjectName: str) -> str:
         output = ''
 
