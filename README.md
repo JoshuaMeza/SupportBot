@@ -8,7 +8,11 @@
 
 ### What is SupportBot?
 
-SupportBot is a bot specially developed to help you with creating a safe space in where you and your school teammates can work and organize in different private channels with the help of subject roles.
+SupportBot is a Discord bot specially developed to help you start using Discord as an environment for work or school teams organization. It creates a healthy and safe space for teamworking by letting different groups of people coexist in a single server, but, with private and independent categories managed by roles (only obtainable with an invitation poll made by the team members or by manually adding the role to a user).
+
+SupportBot also provides some interesting features, like the possibility of creating a _school profile_ and filling it as you need. That information can be later requested by you or any of your teammates that share a _team category_ whenever you want. This is pretty useful for assignment front pages, don't you think so?
+
+If you are a teacher, or someone in charge, and you need to be sure that everything is going OK, there is the possibility of generating a _Supervisor_ role. This role has the particularity of make possible the access to all the _team categories_, but not interacting with them.
 
 ### Why SupportBot?
 
@@ -34,24 +38,23 @@ Some commands are protected by a special role, because they can be dangerous in 
 
 ### Syntaxis
 
-|  Symbol   | Meaning              |
-| :-------: | :------------------- |
-|    `!`    | Command prefix       |
-|   `foo`   | Command body         |
-|   `...`   | Input description    |
-|  `[...]`  | Required input       |
-|  `(...)`  | Optional input       |
-|  `@user`  | Discord user mention |
-| `...:num` | A number input type  |
-| `...:txt` | A text input type    |
+| Symbol  | Meaning                        |
+| :-----: | :----------------------------- |
+|   `!`   | Command prefix                 |
+|  `foo`  | Command body                   |
+| `[...]` | Required input                 |
+| `(...)` | Optional input                 |
+| `@USER` | Discord user mention (_input_) |
+|  `NUM`  | An Integer number (_input_)    |
+|  `TXT`  | Text (_input_)                 |
 
 ### List
 
-|        Command        | Protected | What does it do?                                                                                                 |
-| :-------------------: | :-------: | :--------------------------------------------------------------------------------------------------------------- |
-|        `!help`        |    NO     | Provides an overview of the avialable commands.                                                                  |
-|       `!intro`        |    YES    | Sends an introduccion message to resume what is and how to use the bot.                                          |
-|       `!bmrole`       |    NO     | Creates the _Bot Manager_ role. If a role with the same name currently exists, the bot won't generate a new one. |
-| `!clean (amount:num)` |    YES    | Removes the last given number of messages, or 10 by default                                                      |
+|    Command     | Protected | What does it do?                                                                                                 |
+| :------------: | :-------: | :--------------------------------------------------------------------------------------------------------------- |
+|    `!help`     |    NO     | Provides an overview of the avialable commands.                                                                  |
+|    `!intro`    |    YES    | Sends an introduccion message to resume what is and how to use the bot.                                          |
+|   `!bmrole`    |    NO     | Creates the _Bot Manager_ role. If a role with the same name currently exists, the bot won't generate a new one. |
+| `!clean (NUM)` |    YES    | Removes given number of newest messages, or 10 by default.                                                       |
 
 [📚 Start reading the documentation.](./.github/md/DOCS.md)
